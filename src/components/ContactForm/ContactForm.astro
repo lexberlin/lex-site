@@ -1,0 +1,249 @@
+---
+/**
+ * * Long contact form to get details about a customer's project. Modify as needed
+ *
+ * See https://cosmicthemes.com/docs/contact-form/ for more information on how to set up a contact form
+ *
+ * Form inputs are styled in "global.scss" as form__input, so you can use them elsewhere on the site
+ */
+
+// components
+import Button from "@components/Button/Button.astro";
+---
+
+<section id="contact" class="mx-auto max-w-2xl rounded-lg p-8 bg-rhino-50 my-8">
+	<div class="rounded-lg">
+		<h2 class="h2">Request a Quote</h2>
+		<form id="contact-form" name="contact form" class="mt-4 flex flex-col gap-4 form">
+			<input type="hidden" name="form-name" value="contact" />
+		
+            <fieldset class="grid gap-8 sm:grid-cols-2">
+                <legend>Full Legal Name</legend>
+                <div class="flex flex-col">
+                    <label for="contact-fname"
+                        >First Name <span class="text-red-600">*</span></label
+                    >
+                    <input
+                        type="text"
+                        class="form__input"
+                        name="fname"
+                        id="contact-fname"
+                        placeholder="first name"
+                        required
+                    />
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="contact-lname"
+                        >Last Name <span class="text-red-600">*</span></label
+                    >
+                    <input
+                        type="text"
+                        class="form__input"
+                        name="lname"
+                        id="contact-lname"
+                        placeholder="last name"
+                        required
+                    />
+                </div>
+            </fieldset>
+            <fieldset class="grid gap-8 sm:grid-cols-2">
+                <legend>Contact Information</legend>
+                <div class="flex flex-col">
+                    <label for="contact-email"
+                        >Email <span class="text-red-600">*</span></label
+                    >
+                    <input
+                        type="email"
+                        class="form__input"
+                        name="email"
+                        id="contact-email"
+                        inputmode="email"
+                        placeholder="preferred contact email"
+                        required
+                    />
+                </div>
+                <div class="flex flex-col">
+                    <label for="contact-phone"
+                        >Phone Number <span class="text-red-600">*</span></label
+                    >
+                    <input
+                        type="tel"
+                        class="form__input"
+                        name="phone"
+                        id="contact-phone"
+                        inputmode="tel"
+                        placeholder="phone number"
+                        required
+                    />
+                </div>
+			</fieldset>
+            <!-- text field for Profession (required) -->
+            <fieldset>
+                <legend>Screening Information/References</legend>
+               
+                <div class="inline-flex flex-col mr-4">
+                    <div class="flex flex-col">
+                        <label for="contact-profession"
+                            >Profession <span class="text-red-600">*</span></label
+                        >
+                        <input
+                            type="text"
+                            class="form__input"
+                            name="profession"
+                            id="contact-profession"
+                            placeholder="profession"
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="inline-flex flex-col">
+                    <label for="contact-screeningCategory"
+                        >Type of screening information <span class="text-red-600">*</span></label
+                    >
+                    <select
+                        name="screeningCategory"
+                        id="contact-screeningCategory"
+                        class="form__input pr-8"
+                        required
+                    >
+                        <option disabled selected value="-- select an option --">-- select an option --</option>
+                        <option value="Official Photo Id (drivers license, passport, etc.)">Official Photo Id (drivers license, passport, etc.)</option>
+                        <option value="LinkedIn/Employment Info and Provider References">LinkedIn/Employment Info &amp; Provider References</option>
+                    </select>
+                </div>
+                <!-- this only shows if Photo Id is selected -->
+                <div id="photo-id-section" class="markdown-content" style="display: none;">
+                    <p class="mb-4">If you selected Photo Id, take a photo of your id and send to my encrypted email address: 
+                        <a href="mailto:florasparks@protonmail.com">florasparks@protonmail.com</a>.
+                    </p>
+                </div>
+                <!-- this only shows if Employment Info is selected -->
+                <div id="employment-verification-section" style="display: none;">
+                    <div class="flex flex-col">
+                        <label for="contact-screeningVerification"
+                        >Employment Verification and Provider References <span class="text-red-600">*</span></label
+                        >
+                        <p class="mb-4">Please fill in your info below employment verification / LinkedIn profile and Provider References.</p>
+                        <textarea id="contact-screeningVerification" name="screeningVerification" class="form__input" rows="4" required></textarea>
+                    </div>
+                </div>
+               <div>
+                   <p><em>After our first session, I will delete all private information.</em></p>
+               </div>
+            </fieldset>
+
+
+			<!-- Desired duration (required) -->
+            <fieldset>
+                <legend>Meeting Preferences</legend>
+                <div class="grid gap-8 sm:grid-cols-2">
+                    <div class="flex flex-col">
+                        <label for="contact-duration"
+                            >Desired duration of our time together <span class="text-red-600">*</span></label
+                        >
+                        <input
+                            type="text"
+                            class="form__input"
+                            name="duration"
+                            id="contact-duration"
+                            required
+                        />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="contact-whereAndWhen"
+                            >Where and when would you like to meet? <span class="text-red-600">*</span></label
+                        >
+                        <input
+                            type="text"
+                            class="form__input"
+                            name="whereAndWhen"
+                            id="contact-whereAndWhen"
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <label for="contact-whatYouWantToKnow"
+                        >What would you like me to know about you? What interests you about me?</label
+                    >
+                    <textarea id="contact-whatYouWantToKnow" name="whatYouWantToKnow" class="form__input" rows="4" ></textarea>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Parting Thoughts</legend>
+                <div class="inline-flex flex-col">
+                    <label for="contact-howDidYouFindMe"
+                        >How did you find me? <span class="text-red-600">*</span></label
+                    >
+                    <select name="howDidYouFindMe" id="contact-howDidYouFindMe" class="form__input pr-8" required>
+                        <option disabled selected value="-- select an option --">-- select an option --</option><option value="Tryst">Tryst</option><option value="Slixa">Slixa</option><option value="Eros">Eros</option><option value="Bluesky">Bluesky</option><option value="Referral">Referral</option><option value="other">other</option>
+                    </select>
+            
+                </div>
+                <div class="flex flex-col">
+                    <label for="contact-anythingElse"
+                        >Anything else you'd like to mention? ...I do take kindly to compliments!</label
+                    >
+                    <textarea id="contact-anythingElse" name="anythingElse" class="form__input" rows="4" ></textarea>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Deposit</legend>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="contact-deposit" name="deposit" class="rounded" required />
+                    <label for="contact-deposit" class="mb-0"
+                        >I understand a deposit is required <span class="text-red-600">*</span></label
+                    >
+                </div>
+            </fieldset>
+			<Button variant="primary" type="submit">Submit</Button>
+		</form>
+	</div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const screeningCategory = document.getElementById('contact-screeningCategory');
+        const photoIdSection = document.getElementById('photo-id-section');
+        const employmentSection = document.getElementById('employment-verification-section');
+        const verificationTextarea = document.getElementById('contact-screeningVerification');
+        
+        // Function to handle the visibility of sections
+        function updateSections() {
+            // @ts-ignore
+            const selectedValue = screeningCategory.value;
+            
+            // Hide both sections first
+            if (photoIdSection) photoIdSection.style.display = 'none';
+            if (employmentSection) employmentSection.style.display = 'none';
+            
+            // Show the appropriate section based on selection
+            if (selectedValue === 'Official Photo Id (drivers license, passport, etc.)') {
+                if (photoIdSection) photoIdSection.style.display = 'block';
+                // Clear and disable verification textarea
+                if (verificationTextarea) {
+                // @ts-ignore
+                    verificationTextarea.required = false;
+                // @ts-ignore
+                    verificationTextarea.value = '';
+                }
+            } else if (selectedValue === 'LinkedIn/Employment Info and Provider References') {
+                if (employmentSection) employmentSection.style.display = 'block';
+                // Enable verification textarea
+                if (verificationTextarea) {
+                // @ts-ignore
+                    verificationTextarea.required = true;
+                }
+            }
+        }
+        
+        // Add event listener for changes to the dropdown
+        if (screeningCategory) {
+            screeningCategory.addEventListener('change', updateSections);
+            
+            // Call once on page load in case there's a default selection
+            updateSections();
+        }
+    });
+</script>

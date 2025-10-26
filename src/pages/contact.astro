@@ -1,0 +1,33 @@
+---
+// main layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import Hero from "@components/Hero/HeroPage.astro";
+
+// components
+import ContactForm from "@components/ContactForm/ContactForm.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const siteData = getTranslatedData("siteData", currLocale);
+
+import * as contact from '@data/contact/en/index.md';
+
+import {Content} from '@data/contact/en/index.md';
+
+const { title, description, heroImage, heroAlt, intro } = contact.frontmatter;
+
+---
+
+<BaseLayout title={title} description={description}>
+    <Hero image={heroImage} alt={heroAlt} title={title} />
+	<div class="site-container mx-auto">
+        {intro && <div class="mx-auto max-w-2xl text-3xl italic text-golden-700 mb-6">{intro}</div>}
+        <div class="mx-auto max-w-2xl markdown-content text-xl"> <Content /> </div>
+        <ContactForm />
+	</div>
+</BaseLayout>

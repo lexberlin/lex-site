@@ -1,0 +1,66 @@
+---
+/**
+ * * Hero with background image
+ * You'll want a mobile image, and a desktop image for this.
+ */
+
+import { Image } from "astro:assets";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+// images
+// import heroImage from "@assets/images/happy-family-crop2.png";
+// import heroImageMobile from "@assets/images/happy-family-crop-mobile2.png";
+
+const currLocale = getLocaleFromUrl(Astro.url);
+
+const { title = "", subtitle = "", image, alt } = Astro.props;
+console.log(image, alt);
+---
+
+<div id="hero" class="grid-overlay mb-12 w-screen bg-golden-500">
+	<!-- background image -->
+
+	{
+		image && (
+			<Image
+				src={image}
+				class="h-screen w-screen object-cover object-top"
+				alt={alt}
+				aria-hidden="true"
+				loading="eager"
+				height={2000}
+			/>
+		)
+	}
+
+	<!-- another gradient filter so text has even light bg -->
+	<div
+		class="w-screen h-full bg-gradient-to-r from-rhino-900/90 via-rhino-900/10 to-rhino-900/10 md:to-transparent"
+	>
+	</div>
+
+	<div>
+		<!-- hero items -->
+		<div class="site-container w-full gap-10 pt-32 pb-10">
+			<!-- Hero text -->
+			<div class="mr-auto max-w-lg">
+				{
+					title && (
+						<h1 class="font-display text-5xl leading-tight font-extralight sm:text-6xl text-rhino-100 text-shadow-md">
+							{title}
+						</h1>
+					)
+				}
+
+				{
+					subtitle && (
+						<h2 class="text-4xl leading-tight font-light sm:text-5xl md:leading-tight">
+							{subtitle}
+						</h2>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</div>

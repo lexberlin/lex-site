@@ -1,0 +1,47 @@
+---
+
+// components
+import FooterLink from "@components/Footer/FooterLink.astro";
+import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
+import Button from "@components/Button/Button.astro";
+import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const siteData = getTranslatedData("siteData", currLocale);
+
+const today = new Date();
+---
+
+<footer class="mt-20 bg-rhino-900 text-white py-8">
+	<div class="site-container flex w-full justify-between gap-x-4 gap-y-2 items-center flex-col md:flex-row">
+        <div class="">
+            &copy; {today.getFullYear()}
+            {" "}{siteData.name}. All rights reserved.
+        </div>
+
+		<div>
+			<!-- Socials -->
+                <SocialIcon
+                    href="https://bsky.app/profile/lexberlin.bsky.social"
+                    icon="tabler/brand-bluesky"
+                    social="bluesky"
+                    text="@lexberlin.bsky.social"
+                />
+
+		</div>
+        
+		<div class="">
+			<FooterLink
+				href="/privacy-policy"
+			>
+				Privacy Policy
+			</FooterLink>
+		</div>
+
+	</div>
+</footer>

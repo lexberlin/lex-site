@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	icon: string;
+	social: string; // used for aria label
+	href: string;
+	text?: string;
+}
+
+const { icon, social, href, text } = Astro.props as Props;
+---
+
+<a
+	aria-label={social}
+	href={href}
+	target="_blank"
+	rel="noopener noreferrer"
+	class="gap-2 py-1 hover:border-white/50 border-b-2 border-transparent inline-flex items-center transition-colors"
+>
+	<p class="sr-only">{social}</p>
+	<Icon name={icon} class="h-6 w-6" aria-hidden="true" />
+	{text && <p>{text}</p>}
+</a>

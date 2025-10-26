@@ -1,0 +1,86 @@
+---
+/**
+ * * Centered gallery page layout. This has a title, description, main text, and an image if desired
+ * The CTA and any other sections can be added in here so that all gallery pages have them
+ */
+import { Image } from "astro:assets";
+
+// main layout
+import BaseLayout from "./BaseLayout.astro";
+
+import HeroPage from "@components/Hero/HeroPage.astro";
+
+// components
+interface Props {
+	title: string;
+	description: string;
+    images?: any[]
+}
+
+const { title, description, images } = Astro.props as Props;
+
+
+---
+
+
+
+<BaseLayout title={title} description={description} image={images?.[0].value.image.src || ""}>
+	<!-- heading -->
+    <HeroPage title={title} image={images?.[0].value.image.src || ""} alt={images?.[0].value.label || ""} />
+	<!-- details -->
+	<section class="">
+		<div class="markdown-content mx-auto max-w-2xl px-4 text-xl">
+			<slot />
+		</div>
+		<div class="site-container flex w-full flex-col items-center pt-12 md:pt-16">
+			{images && (
+				<div class="flex flex-wrap gap-4">
+					{images.map((image, index) => (
+						<a
+							href={image.value.image.src}
+                            data-fslightbox="gallery"
+                            data-alt={image.value.label}
+                            data-caption={`<strong class="text-xl font-sans">${image.value.label}</strong>`}
+						>
+                            {/* <img src={image.value.image.src} alt={image.value.label || ""} class="max-h-[300px] object-cover transition-transform duration-300 hover:scale-105" > */}
+							<Image
+								src={image.value.image.src}
+								alt={image.value.label || ""}
+                                height={300}
+								quality="high"
+								class="max-h-[300px] object-cover transition-transform duration-300 hover:scale-105"
+								loading="lazy"
+							/>
+						</a>
+					))}
+				</div>
+			)}
+		</div>
+	</section>
+
+    <script id="fslightbox-pro">
+            import "/js/fslightbox-pro/fslightbox.js";
+		</script>
+        <script async defer>
+
+            document.addEventListener('astro:page-load', ()=>{
+
+                /* ------------------------ Add fslightbox-pro script ----------------------- */
+                // needed as it needs to be loaded on initial page load and view transitions
+
+                if (document.getElementById("fslightbox-pro")) {
+                    document.getElementById("fslightbox-pro")?.remove();
+                    console.info(`just removed fslightbox-pro script`)
+                }
+                const addScript = document.createElement("script");
+                addScript.type = "text/javascript";
+                addScript.id = "fslightbox-pro";
+                addScript.src = "/js/fslightbox-pro/fslightbox.js";
+                (document.getElementsByTagName("body")[0] || document.documentElement ).prepend(addScript);
+
+                // console.info(`just added github star rating script in <head>`)
+            })
+
+        </script>
+
+</BaseLayout>

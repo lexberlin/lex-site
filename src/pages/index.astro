@@ -1,0 +1,38 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Hero from "@components/Hero/HeroPage.astro";
+import HomeCard from "@components/HomeCard/HomeCard.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const siteData = getTranslatedData("siteData", currLocale);
+
+import heroImage from "@assets/images/home.jpg";
+
+// utils
+import { getAllPosts } from "@js/homeCardsUtils";
+
+const cards = await getAllPosts(currLocale);
+
+---
+
+<BaseLayout title={siteData.title} description={siteData.description}>
+	<Hero image={heroImage} alt="Flora Sparks" />
+    <!-- TODO: convert this to editable content with CMS -->
+    <div class="site-container ">
+		<div class="mt-10 flex flex-col gap-16 md:mt-16 md:gap-24 max-w-9/10 mx-auto">
+            {cards.map((post) => (
+                <HomeCard post={post} />
+            ))}
+        </div>
+    </div>
+</BaseLayout>

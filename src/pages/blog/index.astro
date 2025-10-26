@@ -1,0 +1,27 @@
+---
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import PostCardFull from "@components/PostCard/PostCardFull.astro";
+import Hero from "@components/Hero/HeroPage.astro";
+
+// utils
+import { getAllPosts } from "@js/blogUtils";
+import { getLocaleFromUrl } from "@js/localeUtils";
+
+const currLocale = getLocaleFromUrl(Astro.url);
+const posts = await getAllPosts(currLocale);
+---
+
+<BaseLayout
+	title="Our Blog Posts"
+	description="Learn from our blog posts about web development, design, and more."
+>
+<Hero image="" alt="" title="Recent Posts" />
+	<section class="site-container max-w-9/10">
+		<div class="mt-20 grid gap-4 gap-y-12 md:mt-28">
+			{posts.map((post) => <PostCardFull post={post} showDescription={true} />)}
+		</div>
+	</section>
+</BaseLayout>
