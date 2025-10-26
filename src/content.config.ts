@@ -57,7 +57,7 @@ const otherPagesCollection = defineCollection({
 		z.object({
 			title: z.string(),
 			description: z.string(),
-			heroImage: z.string().optional(),
+			heroImage: image().optional(),
 			heroAlt: z.string().optional(),
 			// mappingKey allows you to match entries across languages for SEO purposes
 			mappingKey: z.string().optional(),
